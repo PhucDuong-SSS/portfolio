@@ -18338,3 +18338,33 @@ $(function () {
 		$(this).text($(this).data('counter-from'));
 	});
 });
+
+$(document).ready(function(){
+	$('#submit').on('click',function(e){
+		e.preventDefault();
+		let name = $('#name').val();
+		let email = $('#email').val();
+		let message = $('#message').val();
+		
+		if(name != '' && email !='' && message!="")
+		{
+			sendEmail(name, email, message);
+		}
+		
+	})
+})
+
+function sendEmail(name, email, message)
+{
+	Email.send({
+    Host : "smtp.gmail.com",
+    Username : "phucdndev@gmail.com",
+    Password : "lqhdazavkzymhqbe",
+    To : 'phucdndev@gmail.com',
+    From : "phucdndev@gmail.com",
+    Subject : `${name} send you a email`,
+    Body : `Name:${name} <br/> Email: ${email} <br/> Messager: ${message}`
+}).then(
+  message => alert('Cảm ơn bạn đã gửi email cho tôi, tôi sẽ phản hồi sớm nhất có thể')
+);
+}
