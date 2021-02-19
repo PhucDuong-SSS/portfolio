@@ -18341,14 +18341,20 @@ $(function () {
 
 $(document).ready(function(){
 	$('#submit').on('click',function(e){
-		e.preventDefault();
+		// e.preventDefault();
 		let name = $('#name').val();
 		let email = $('#email').val();
 		let message = $('#message').val();
+		console.log(name !=="");
+		let isEmail = isEmailAddress(email);
 		
-		if(name != '' && email !='' && message!="")
+		if(name !== "" && email !== "" && message!== "" && isEmail)
 		{
 			sendEmail(name, email, message);
+			// clear after sending
+				$('#name').val('');
+				$('#email').val('');
+			 	$('#message').val('');
 		}
 		
 	})
@@ -18367,4 +18373,15 @@ function sendEmail(name, email, message)
 }).then(
   message => alert('Cảm ơn bạn đã gửi email cho tôi, tôi sẽ phản hồi sớm nhất có thể')
 );
+}
+function isEmailAddress(str) {
+	var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	if(pattern.test(str))
+	{
+		return pattern.test(str);  // returns a boolean
+	}
+	alert("Sai địa chỉ email");
+	return pattern.test(str);
+	
+	 
 }
