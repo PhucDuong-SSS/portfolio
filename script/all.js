@@ -18341,20 +18341,26 @@ $(function () {
 
 $(document).ready(function(){
 	$('#submit').on('click',function(e){
-		// e.preventDefault();
+
+
 		let name = $('#name').val();
 		let email = $('#email').val();
 		let message = $('#message').val();
-		console.log(name !=="");
-		let isEmail = isEmailAddress(email);
 		
-		if(name !== "" && email !== "" && message!== "" && isEmail)
+		
+		if(name !== "" && email !== "" && message!== "" )
 		{
-			sendEmail(name, email, message);
-			// clear after sending
-				$('#name').val('');
-				$('#email').val('');
-			 	$('#message').val('');
+			e.preventDefault();
+			let isEmail = isEmailAddress(email);
+			if(isEmail)
+			{
+				sendEmail(name, email, message);
+				// clear after sending
+					$('#name').val('');
+					$('#email').val('');
+					 $('#message').val('');
+			}
+			
 		}
 		
 	})
